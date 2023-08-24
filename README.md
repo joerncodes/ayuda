@@ -17,7 +17,7 @@
 
 ## About
 
-¡Ayuda! is a CLI tool that helps you with common operations you typically encounter when working with Typescript or Node projects. See [**Commands**](#commands) for a list of possible commands.
+**¡Ayuda!** (Spanish for "help") is a CLI tool that helps you with common operations you typically encounter when working with Typescript or Node projects. See [**Commands**](#commands) for a list of possible commands.
 
 ### Contributors
 
