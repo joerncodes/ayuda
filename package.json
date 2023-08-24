@@ -1,7 +1,6 @@
 {
   "name": "ayuda",
-  "version": "0.0.3",
-  "main": "index.js",
+  "version": "0.0.4",
   "license": "MIT",
   "bin": {
     "ayuda": "dist/ayuda.js"
@@ -18,11 +17,14 @@
   "dependencies": {
     "chalk": "^4.1.0-commonjs",
     "commander": "^11.0.0",
+    "enquirer": "^2.4.1",
     "npm-registry-fetch": "^16.0.0",
+    "semver": "^7.5.4",
     "typescript": "^5.1.6"
   },
   "devDependencies": {
     "@types/npm-registry-fetch": "^8.0.4",
+    "@types/semver": "^7.5.0",
     "prettier": "3.0.2"
   }
 }

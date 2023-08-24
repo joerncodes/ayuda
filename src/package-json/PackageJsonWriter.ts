@@ -16,6 +16,16 @@ export default class PackageJsonWriter {
     this.packageJson = JSON.parse(content);
   }
 
+  setVersion(version: string): PackageJsonWriter {
+    this.packageJson.version = version;
+
+    return this;
+  }
+
+  getPackageJson(): any {
+    return this.packageJson;
+  }
+
   async addDependency(dependency: TDependency): Promise<PackageJsonWriter> {
     if (typeof this.packageJson.dependencies === "undefined") {
       this.packageJson.dependencies = {};
