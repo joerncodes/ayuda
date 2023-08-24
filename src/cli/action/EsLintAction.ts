@@ -23,6 +23,7 @@ export default class EsLintAction {
     const promises: Promise<any>[] = [];
     [
       "eslint",
+      "@typescript-eslint/parser",
       "@typescript-eslint/eslint-plugin",
       "eslint-plugin-import",
       "eslint-plugin-prettier",

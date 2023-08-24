@@ -1,6 +1,7 @@
 TODO.md
 node_modules
 dist
+.lintstagedrc.json
 .prettierignore
 .prettierrc
 .eslintrc.json

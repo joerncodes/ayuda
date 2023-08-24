@@ -1,6 +1,9 @@
 import path from "path";
 import fs from "fs";
 
+/**
+ * @author Joern Meyer <https://joern.url.lol/🧑‍💻>
+ */
 export default class GitIgnoreWriter {
   protected gitIgnoreFilename: string;
   protected gitIgnore: string[];
