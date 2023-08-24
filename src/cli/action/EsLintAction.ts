@@ -10,14 +10,11 @@ export default class EsLintAction {
   async execute(): Promise<void> {
     const destination = process.cwd();
 
-    const gitIgnoreWriter = new GitIgnoreWriter();
     const packageJsonManager = new PackageJsonManager();
 
     [new EsLintRcTemplate()].forEach((file) => {
       const filename = path.join(destination, file.getFilename());
       fs.writeFileSync(filename, file.getContents());
-
-      gitIgnoreWriter.add(file.getFilename());
     });
 
     const promises: Promise<any>[] = [];
@@ -44,7 +41,6 @@ export default class EsLintAction {
       command: "eslint --fix",
     });
 
-    await gitIgnoreWriter.write();
     await packageJsonManager.write();
   }
 }

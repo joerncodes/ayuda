@@ -9,14 +9,11 @@ export default class PrettierAction {
   async execute(): Promise<void> {
     const destination = process.cwd();
 
-    const gitIgnoreWriter = new GitIgnoreWriter();
     const packageJsonManager = new PackageJsonManager();
 
     [new PrettierIgnoreTemplate(), new PrettierRcTemplate()].forEach((file) => {
       const filename = path.join(destination, file.getFilename());
       fs.writeFileSync(filename, file.getContents());
-
-      gitIgnoreWriter.add(file.getFilename());
     });
 
     await packageJsonManager.addDependency({
@@ -28,7 +25,6 @@ export default class PrettierAction {
       command: "prettier --write --ignore-unknown",
     });
 
-    await gitIgnoreWriter.write();
     await packageJsonManager.write();
   }
 }
