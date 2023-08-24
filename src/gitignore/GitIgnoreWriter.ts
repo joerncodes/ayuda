@@ -8,7 +8,7 @@ export default class GitIgnoreWriter {
   constructor() {
     this.gitIgnoreFilename = path.join(process.cwd(), ".gitignore");
 
-    if(!fs.existsSync(this.gitIgnoreFilename)) {
+    if (!fs.existsSync(this.gitIgnoreFilename)) {
       fs.writeFileSync(this.gitIgnoreFilename, "");
     }
 
@@ -17,7 +17,7 @@ export default class GitIgnoreWriter {
     });
     this.gitIgnore = content.split("\n");
   }
-  
+
   add(line: string): GitIgnoreWriter {
     this.gitIgnore.push(line);
 
@@ -26,7 +26,9 @@ export default class GitIgnoreWriter {
 
   async write(): Promise<GitIgnoreWriter> {
     const content = new Set(this.gitIgnore);
-    const uniqueArray = Array.from(content).filter((line) => line.trim().length > 0);
+    const uniqueArray = Array.from(content).filter(
+      (line) => line.trim().length > 0
+    );
 
     await fs.writeFileSync(
       this.gitIgnoreFilename,

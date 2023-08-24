@@ -47,8 +47,8 @@ export default class PackageJsonWriter {
 
     return this;
   }
-  
-  addScript(script: TScript): PackageJsonWriter{
+
+  addScript(script: TScript): PackageJsonWriter {
     if (!this.packageJson.scripts) {
       this.packageJson.scripts = {};
     }

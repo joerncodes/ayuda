@@ -1,6 +1,7 @@
 import { Command, ParseOptions } from "commander";
 import chalk from "chalk";
 import PrettierAction from "./action/PrettierAction";
+import EsLintAction from "./action/EsLintAction";
 import IncreaseVersionAction from "./action/IncreaseVersionAction";
 
 export default class AyudaCommand extends Command {
@@ -8,6 +9,7 @@ export default class AyudaCommand extends Command {
     super();
     this.name("ayuda").argument("<command>", "The command to run");
     this.prettierCommand();
+    this.esLintCommand();
     this.packageCommand();
   }
 
@@ -17,28 +19,25 @@ export default class AyudaCommand extends Command {
   }
 
   private done(): void {
-      console.log(chalk.bold("🚀 Done!"));
+    console.log(chalk.bold("🚀 Done!"));
   }
 
   private packageCommand(): void {
-    this
-      .command("package")
+    this.command("package")
       .argument("<subcommand>")
       .action(async (subcommand: string) => {
-      console.log(`Increasing ${chalk.bold("package version")}.\n`);
+        console.log(`Increasing ${chalk.bold("package version")}.\n`);
 
-      switch(subcommand) {
-        case "increase-version":
-          await new IncreaseVersionAction().execute();
-          break;
-        default:
-          throw new Error(`Unknown subcommand: ${subcommand}.`);
-      }
+        switch (subcommand) {
+          case "increase-version":
+            await new IncreaseVersionAction().execute();
+            break;
+          default:
+            throw new Error(`Unknown subcommand: ${subcommand}.`);
+        }
 
-      return this.done();
-
-    });
-
+        return this.done();
+      });
   }
 
   private prettierCommand(): void {
@@ -46,6 +45,15 @@ export default class AyudaCommand extends Command {
       console.log(`Setting up ${chalk.bold("prettier")}.\n`);
 
       await new PrettierAction().execute();
+      this.done();
+    });
+  }
+
+  private esLintCommand(): void {
+    this.command("eslint").action(async () => {
+      console.log(`Setting up ${chalk.bold("eslint")}.\n`);
+
+      await new EsLintAction().execute();
       this.done();
     });
   }

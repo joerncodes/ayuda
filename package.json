@@ -12,7 +12,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc",
     "ayuda": "yarn build && node dist/ayuda.js",
-    "prettier": "prettier --write --ignore-unknown"
+    "prettier": "prettier --write --ignore-unknown",
+    "eslint:fix": "eslint --fix"
   },
   "dependencies": {
     "chalk": "^4.1.0-commonjs",
@@ -25,6 +26,12 @@
   "devDependencies": {
     "@types/npm-registry-fetch": "^8.0.4",
     "@types/semver": "^7.5.0",
-    "prettier": "3.0.2"
+    "prettier": "3.0.2",
+    "@types/eslint": "8.44.2",
+    "eslint-config-prettier": "9.0.0",
+    "eslint-plugin-import": "2.28.1",
+    "eslint-plugin-prettier": "5.0.0",
+    "eslint": "8.47.0",
+    "@typescript-eslint/eslint-plugin": "6.4.1"
   }
 }
