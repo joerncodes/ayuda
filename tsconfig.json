@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true
+  },
+  "include": ["./src/**/*.ts", "src/cli/run.mjs"],
+  "exclude": ["node_modules", "**/*.jest.test.ts"]
+}

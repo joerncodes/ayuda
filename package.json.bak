@@ -1,0 +1,19 @@
+{
+  "name": "giddy-up",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "giddy-up": "yarn build && node dist/giddy-up.js"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0-commonjs",
+    "commander": "^11.0.0",
+    "npm-registry-fetch": "^16.0.0",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/npm-registry-fetch": "^8.0.4"
+  }
+}

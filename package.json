@@ -1,0 +1,28 @@
+{
+  "name": "ayuda",
+  "version": "0.0.3",
+  "main": "index.js",
+  "license": "MIT",
+  "bin": {
+    "ayuda": "dist/ayuda.js"
+  },
+  "author": {
+    "name": "Jörn Meyer",
+    "url": "https://joern.url.lol/🧑‍💻"
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "ayuda": "yarn build && node dist/ayuda.js",
+    "prettier": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "chalk": "^4.1.0-commonjs",
+    "commander": "^11.0.0",
+    "npm-registry-fetch": "^16.0.0",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/npm-registry-fetch": "^8.0.4",
+    "prettier": "3.0.2"
+  }
+}
