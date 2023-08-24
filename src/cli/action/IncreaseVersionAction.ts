@@ -26,8 +26,11 @@ export default class IncreaseVersionAction {
             ]
         }) as { releaseType: string; };
 
-        const updated = semverInc(version, releaseType as ReleaseType);
+        const updated = semverInc(version, releaseType as ReleaseType) as string;
 
-        packageJsonWriter.setVersion(updated as string).write();
+        console.log(`\nUpdated package version to ${chalk.bold(updated)}.\n`);
+
+
+        packageJsonWriter.setVersion(updated).write();
     }
 }
