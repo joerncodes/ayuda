@@ -4,7 +4,7 @@ import TDependency from "../types/TDependency";
 import TScript from "../types/TScript";
 import { json as fetchPackageJson } from "npm-registry-fetch";
 
-export default class PackageJsonWriter {
+export default class PackageJsonManager {
   protected packageJsonFilename: string;
   protected packageJson: any;
 
@@ -16,7 +16,14 @@ export default class PackageJsonWriter {
     this.packageJson = JSON.parse(content);
   }
 
-  setVersion(version: string): PackageJsonWriter {
+  hasPackage(packageName: string): boolean {
+    return packageName in {
+      ...(this.packageJson.dependencies || {}),
+      ...(this.packageJson.devDependencies || {})
+    }
+  }
+
+  setVersion(version: string): PackageJsonManager {
     this.packageJson.version = version;
 
     return this;
@@ -26,7 +33,7 @@ export default class PackageJsonWriter {
     return this.packageJson;
   }
 
-  async addDependency(dependency: TDependency): Promise<PackageJsonWriter> {
+  async addDependency(dependency: TDependency): Promise<PackageJsonManager> {
     if (typeof this.packageJson.dependencies === "undefined") {
       this.packageJson.dependencies = {};
     }
@@ -48,7 +55,7 @@ export default class PackageJsonWriter {
     return this;
   }
 
-  addScript(script: TScript): PackageJsonWriter {
+  addScript(script: TScript): PackageJsonManager {
     if (!this.packageJson.scripts) {
       this.packageJson.scripts = {};
     }
@@ -59,7 +66,7 @@ export default class PackageJsonWriter {
     return this;
   }
 
-  async write(): Promise<PackageJsonWriter> {
+  async write(): Promise<PackageJsonManager> {
     await fs.writeFileSync(
       this.packageJsonFilename,
       JSON.stringify(this.packageJson, null, 2)

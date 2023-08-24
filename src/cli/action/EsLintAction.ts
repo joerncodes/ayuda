@@ -3,7 +3,7 @@ import fs from "fs";
 import PrettierIgnoreTemplate from "../../templates/prettier/PrettierIgnoreTemplate";
 import PrettierRcTemplate from "../../templates/prettier/PrettierRcTemplate";
 import GitIgnoreWriter from "../../gitignore/GitIgnoreWriter";
-import PackageJsonWriter from "../../package-json/PackageJsonWriter";
+import PackageJsonManager from "../../package-json/PackageJsonManager";
 import EsLintRcTemplate from "../../templates/eslint/EsLintRcTemplate";
 
 export default class EsLintAction {
@@ -11,7 +11,7 @@ export default class EsLintAction {
     const destination = process.cwd();
 
     const gitIgnoreWriter = new GitIgnoreWriter();
-    const packageJsonWriter = new PackageJsonWriter();
+    const packageJsonManager = new PackageJsonManager();
 
     [new EsLintRcTemplate()].forEach((file) => {
       const filename = path.join(destination, file.getFilename());
@@ -30,7 +30,7 @@ export default class EsLintAction {
       "eslint-config-prettier",
     ].forEach((packageName) => {
       promises.push(
-        packageJsonWriter.addDependency({
+        packageJsonManager.addDependency({
           packageName,
           dev: true,
         })
@@ -38,12 +38,12 @@ export default class EsLintAction {
     });
     await Promise.all(promises);
 
-    packageJsonWriter.addScript({
+    packageJsonManager.addScript({
       key: "eslint:fix",
       command: "eslint --fix",
     });
 
     await gitIgnoreWriter.write();
-    await packageJsonWriter.write();
+    await packageJsonManager.write();
   }
 }

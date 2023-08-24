@@ -1,4 +1,4 @@
-import PackageJsonWriter from "../../package-json/PackageJsonWriter";
+import PackageJsonManager from "../../package-json/PackageJsonManager";
 import semverInc from "semver/functions/inc";
 import { prompt } from "enquirer";
 import { ReleaseType } from "semver";
@@ -6,8 +6,8 @@ import chalk from "chalk";
 
 export default class IncreaseVersionAction {
   async execute(): Promise<void> {
-    const packageJsonWriter = new PackageJsonWriter();
-    const { version } = packageJsonWriter.getPackageJson();
+    const packageJsonManager = new PackageJsonManager();
+    const { version } = packageJsonManager.getPackageJson();
 
     console.log(`Your current version is ${chalk.bold(version)}.\n`);
 
@@ -42,6 +42,6 @@ export default class IncreaseVersionAction {
 
     console.log(`\nUpdated package version to ${chalk.bold(updated)}.\n`);
 
-    packageJsonWriter.setVersion(updated).write();
+    packageJsonManager.setVersion(updated).write();
   }
 }
