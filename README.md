@@ -21,9 +21,9 @@
 
 ### Contributors
 
-| Image             | Name                     | E-Mail                            |
-| ----------------- | ------------------------ | --------------------------------- |
-| ![][joern-avatar] | [Jörn Meyer][joern-link] | [mail@joern.art]joern-link-email] |
+| Image             | Name                     | E-Mail                             |
+| ----------------- | ------------------------ | ---------------------------------- |
+| ![][joern-avatar] | [Jörn Meyer][joern-link] | [mail@joern.art][joern-link-email] |
 
 ### Built with
 
