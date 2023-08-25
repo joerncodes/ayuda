@@ -1,5 +1,6 @@
 import { prompt } from "enquirer";
 import { execSync } from "child_process";
+import ora from "ora-classic";
 
 export default class InstallDependenciesAction {
   async execute(): Promise<void> {
@@ -25,6 +26,15 @@ export default class InstallDependenciesAction {
         break;
     }
 
+    const spinner = ora("Installing dependencies...").start();
+    const timeOut = setTimeout(() => {
+      spinner.color = "yellow";
+      spinner.text = "Installing dependencies...";
+    }, 100);
+
     execSync(command, { encoding: "utf-8" });
+
+    spinner.stop();
+    clearTimeout(timeOut);
   }
 }
