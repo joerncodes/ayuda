@@ -4,9 +4,11 @@ import PrettierIgnoreTemplate from "../../templates/prettier/PrettierIgnoreTempl
 import PrettierRcTemplate from "../../templates/prettier/PrettierRcTemplate";
 import PackageJsonProcessor from "package-json-processor/PackageJsonProcessor";
 import { findLatestVersion } from "../../utils/findLatestVersion";
+import InstallDependenciesAction from "./InstallDependenciesAction";
 
 export default class PrettierAction {
   async execute(): Promise<void> {
+    console.log("Installing dependencies...\n");
     const destination = process.cwd();
 
     const packageJsonProcessor = new PackageJsonProcessor();
@@ -27,7 +29,8 @@ export default class PrettierAction {
       command: "prettier --write --ignore-unknown",
     });
 
-    console.log(packageJsonProcessor.getPackageJsonObject());
     await packageJsonProcessor.save();
+
+    await new InstallDependenciesAction().execute();
   }
 }

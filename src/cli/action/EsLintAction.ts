@@ -3,6 +3,7 @@ import fs from "fs";
 import EsLintRcTemplate from "../../templates/eslint/EsLintRcTemplate";
 import PackageJsonProcessor from "package-json-processor/PackageJsonProcessor";
 import { findLatestVersion } from "../../utils/findLatestVersion";
+import InstallDependenciesAction from "./InstallDependenciesAction";
 
 export default class EsLintAction {
   async execute(): Promise<void> {
@@ -45,5 +46,6 @@ export default class EsLintAction {
     });
 
     await packageJsonProcessor.save();
+    await new InstallDependenciesAction().execute();
   }
 }

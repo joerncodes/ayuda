@@ -1,6 +1,6 @@
 {
   "name": "ayuda",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "bin": {
     "ayuda": "dist/ayuda.js"
@@ -26,16 +26,16 @@
     "typescript": "^5.1.6"
   },
   "devDependencies": {
+    "@types/eslint": "8.44.2",
     "@types/npm-registry-fetch": "^8.0.4",
     "@types/semver": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "6.4.1",
     "@typescript-eslint/parser": "6.4.1",
-    "eslint": "8.47.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-import": "2.28.1",
     "eslint-plugin-prettier": "5.0.0",
     "husky": "^8.0.3",
     "prettier": "3.0.2",
-    "@types/eslint": "8.44.2",
-    "@typescript-eslint/eslint-plugin": "6.4.1"
+    "eslint": "8.47.0"
   }
 }
