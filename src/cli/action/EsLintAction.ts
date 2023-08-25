@@ -1,16 +1,14 @@
 import path from "path";
 import fs from "fs";
-import PrettierIgnoreTemplate from "../../templates/prettier/PrettierIgnoreTemplate";
-import PrettierRcTemplate from "../../templates/prettier/PrettierRcTemplate";
-import GitIgnoreWriter from "../../gitignore/GitIgnoreWriter";
-import PackageJsonManager from "../../package-json/PackageJsonManager";
 import EsLintRcTemplate from "../../templates/eslint/EsLintRcTemplate";
+import PackageJsonProcessor from "package-json-processor/PackageJsonProcessor";
+import { findLatestVersion } from "../../utils/findLatestVersion";
 
 export default class EsLintAction {
   async execute(): Promise<void> {
     const destination = process.cwd();
 
-    const packageJsonManager = new PackageJsonManager();
+    const packageJsonProcessor = new PackageJsonProcessor();
 
     [new EsLintRcTemplate()].forEach((file) => {
       const filename = path.join(destination, file.getFilename());
@@ -28,19 +26,24 @@ export default class EsLintAction {
       "eslint-config-prettier",
     ].forEach((packageName) => {
       promises.push(
-        packageJsonManager.addDependency({
-          packageName,
-          dev: true,
+        new Promise((resolve) => {
+          findLatestVersion(packageName).then((version) => {
+            packageJsonProcessor.addDevDependency({
+              packageName,
+              version,
+            });
+            resolve(true);
+          });
         })
       );
     });
     await Promise.all(promises);
 
-    packageJsonManager.addScript({
+    packageJsonProcessor.addScript({
       key: "eslint:fix",
       command: "eslint --fix",
     });
 
-    await packageJsonManager.write();
+    await packageJsonProcessor.save();
   }
 }

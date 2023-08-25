@@ -5,3 +5,4 @@ dist
 .prettierignore
 .prettierrc
 .eslintrc.json
+yarn-error.log

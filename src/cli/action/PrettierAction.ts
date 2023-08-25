@@ -2,29 +2,32 @@ import path from "path";
 import fs from "fs";
 import PrettierIgnoreTemplate from "../../templates/prettier/PrettierIgnoreTemplate";
 import PrettierRcTemplate from "../../templates/prettier/PrettierRcTemplate";
-import GitIgnoreWriter from "../../gitignore/GitIgnoreWriter";
-import PackageJsonManager from "../../package-json/PackageJsonManager";
+import PackageJsonProcessor from "package-json-processor/PackageJsonProcessor";
+import { findLatestVersion } from "../../utils/findLatestVersion";
 
 export default class PrettierAction {
   async execute(): Promise<void> {
     const destination = process.cwd();
 
-    const packageJsonManager = new PackageJsonManager();
+    const packageJsonProcessor = new PackageJsonProcessor();
 
     [new PrettierIgnoreTemplate(), new PrettierRcTemplate()].forEach((file) => {
       const filename = path.join(destination, file.getFilename());
       fs.writeFileSync(filename, file.getContents());
     });
 
-    await packageJsonManager.addDependency({
+    const version = await findLatestVersion("prettier");
+    packageJsonProcessor.addDevDependency({
       packageName: "prettier",
-      dev: true,
+      version,
     });
-    packageJsonManager.addScript({
+
+    packageJsonProcessor.addScript({
       key: "prettier",
       command: "prettier --write --ignore-unknown",
     });
 
-    await packageJsonManager.write();
+    console.log(packageJsonProcessor.getPackageJsonObject());
+    await packageJsonProcessor.save();
   }
 }
